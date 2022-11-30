@@ -106,6 +106,9 @@ function draw() {
         case '9':
             drawFilterInstagram(9);
             break;
+	case '11':
+	    drawDogFaceMirror();
+	    break;
 	case '12':
 	    drawSpidermanMask();
             break;
@@ -160,6 +163,34 @@ function drawDetectionSquare() {
 function drawDogFace() {
     const positions = faceTracker.getCurrentPosition();
 	if (positions !== false) {
+        if (positions.length >= 20) {
+            push();
+            translate(-100, -150); // offset adjustment
+            image(imgDogEarRight, positions[20][0], positions[20][1]);
+            pop();
+        }
+
+        if (positions.length >= 16) {
+            push();
+            translate(-20, -150); // offset adjustment
+            image(imgDogEarLeft, positions[16][0], positions[16][1]);
+            pop();
+        }
+
+        if (positions.length >= 62) {
+            push();
+            translate(-57, -20); // offset adjustment
+            image(imgDogNose, positions[62][0], positions[62][1]);
+            pop();
+        }
+    }
+}
+
+// Dog Face Filter
+function drawDogFaceMirror() {
+    const positions = faceTracker.getCurrentPosition();
+     filter(THRESHOLD);
+        if (positions !== false) {
         if (positions.length >= 20) {
             push();
             translate(-100, -150); // offset adjustment
